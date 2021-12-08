@@ -1,0 +1,104 @@
+{
+    "type": "object",
+    "required": [
+      "data"
+    ],
+    "properties": {
+      "data": {
+        "type": "object",
+        "required": [
+            "expiresIn", "accessToken", "expiry", "tokenType", "userId", "tenantId", "permissions"
+        ],
+        "properties": {
+          "expiresIn": {
+            "type": "number"
+          },
+          "expiry": {
+            "type": "number"
+          },
+          "tokenType": {
+            "type": "string"
+          },
+          "accessToken": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "number"
+          },
+          "username": {
+            "type": "string"
+          },
+          "tenantId": {
+            "type": "number"
+          },
+          "permissions": {
+            "type": "array",
+            "items":{
+              "properties": {
+                "id": {
+                  "type": "number"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "limits": {
+                  "type": "number"
+                },
+                "units": {
+                  "type": "string"
+                },
+                "action": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "read": {
+                      "type": "boolean"
+                    },
+                    "write": {
+                      "type": "boolean"
+                    },
+                    "update": {
+                      "type": "boolean"
+                    },
+                    "delete": {
+                      "type": "boolean"
+                    },
+                    "deleteAll": {
+                      "type": "boolean"
+                    },
+                    "email": {
+                      "type": "boolean"
+                    },
+                    "meeting": {
+                      "type": "boolean"
+                    },
+                    "call": {
+                      "type": "boolean"
+                    },
+                    "sms": {
+                      "type": "boolean"
+                    },
+                    "task": {
+                      "type": "boolean"
+                    },
+                    "note": {
+                      "type": "boolean"
+                    },
+                    "readAll": {
+                      "type": "boolean"
+                    },
+                    "updateAll": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+}
