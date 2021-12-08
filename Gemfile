@@ -1,0 +1,8 @@
+source 'https://rubygems.org'
+gem 'multi_json', '~> 1.15.0'
+gem 'json-schema', '~> 2.8.1'
+gem 'jwt', '~>2.2.3'
+gem 'rspec', '~> 3.5'
+gem 'webmock', '~> 3.12.2'
+gem 'rest-client', '~> 2.1.0'
+gem 'underscorize_keys', '~> 0.0.1'
