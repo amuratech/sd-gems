@@ -17,7 +17,7 @@ module Auth
       begin 
        JSON::Validator.validate!(File.read(File.join(File.dirname(__FILE__), 'token-schema.json')), options)
       rescue JSON::Schema::ValidationError => e
-        raise(ExceptionHandler::SdAuthException, INVALID_TOKEN)
+        raise(AuthExceptionHandler::SdAuthException, INVALID_TOKEN)
         puts "==Invalid auth data: #{e.message}=="
       end
       options = options['data']

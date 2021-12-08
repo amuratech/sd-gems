@@ -8,23 +8,23 @@ module Iam
       begin
         response = RestClient.get(SERVICE_IAM + "/v1/users/#{user_id}", { 'Authorization': "Bearer #{token}" }
         )
-        raise(ExceptionHandler::SdAuthException, INTERNAL_SERVER_ERROR) if response.nil?
+        raise(AuthExceptionHandler::SdAuthException, INTERNAL_SERVER_ERROR) if response.nil?
 
         user_data = JSON(response.body)
         if for_tenant_user && !user_data['createdBy'].nil?
             puts 'Only Tenant User can perform this action'
-            raise(ExceptionHandler::SdAuthException, UNAUTHORISED)
+            raise(AuthExceptionHandler::SdAuthException, UNAUTHORISED)
         end
         { id: user_id, name: [user_data['firstName'],user_data['lastName']].join(' ') }
       rescue RestClient::Unauthorized
         puts 'Aunauthorised user'
-        raise(ExceptionHandler::SdAuthException, UNAUTHORISED)
+        raise(AuthExceptionHandler::SdAuthException, UNAUTHORISED)
       rescue RestClient::NotFound, RestClient::BadRequest
         puts 'No user found with given access token'
-        raise(ExceptionHandler::SdAuthException, INVALID_USER_DATA)
+        raise(AuthExceptionHandler::SdAuthException, INVALID_USER_DATA)
       rescue RestClient::InternalServerError
         puts 'Error while fetching user details'
-        raise(ExceptionHandler::SdAuthException, INTERNAL_SERVER_ERROR)
+        raise(AuthExceptionHandler::SdAuthException, INTERNAL_SERVER_ERROR)
       end
     end
   end

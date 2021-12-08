@@ -9,7 +9,7 @@ RSpec.describe SdAuthenticator do
 
       context 'with no tenant or user classes are defined' do
           it 'should raise invalid token error' do
-              expect { SdAuthenticator.authenticate "Authorization #{token}" }.to raise_error(ExceptionHandler::SdAuthException, INVALID_TOKEN)
+              expect { SdAuthenticator.authenticate "Authorization #{token}" }.to raise_error(AuthExceptionHandler::SdAuthException, INVALID_TOKEN)
           end
       end
 

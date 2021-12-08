@@ -1,3 +1,3 @@
-module ExceptionHandler 
+module AuthExceptionHandler 
     class SdAuthException < StandardError;end
 end
