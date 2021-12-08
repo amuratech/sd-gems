@@ -5,14 +5,14 @@ require_relative '../../lib/auth/token_parser.rb'
 RSpec.describe Auth::Data,type: :model do
 
   before do
-    @auth_data = Auth::TokenParser.parse("eyJhbGciOiJIUzI1NiJ9.eyJkYXRhIjp7ImFjY2Vzc1Rva2VuIjoiMWM3N2MzMmYtNWY1Yi00MzQyLTkxYjItOTYxZTM4MDQ1NDk4IiwiZXhwaXJlc0luIjozNjAwLCJleHBpcnkiOjE2Mzg4NTkwNzMsInVzZXJJZCI6NDk0NSwidGVuYW50SWQiOjIzMDgsInRva2VuVHlwZSI6IkJlYXJlciIsInBlcm1pc3Npb25zIjpbeyJuYW1lIjoibGVhZCIsImRlc2NyaXB0aW9uIjoiaGFzIGFjY2VzcyB0byBsZWFkIHJlc291cmNlIiwibGltaXRzIjotMSwidW5pdHMiOiJjb3VudCIsImFjdGlvbiI6eyJyZWFkIjp0cnVlLCJyZWFkQWxsIjp0cnVlfX0seyJuYW1lIjoiZGVhbCIsImRlc2NyaXB0aW9uIjoiaGFzIGFjY2VzcyB0byBkZWFsIHJlc291cmNlIiwibGltaXRzIjotMSwidW5pdHMiOiJjb3VudCIsImFjdGlvbiI6eyJyZWFkIjp0cnVlLCJyZWFkQWxsIjp0cnVlfX0seyJuYW1lIjoidXNlciIsImRlc2NyaXB0aW9uIjoiaGFzIGFjY2VzcyB0byB1c2VyIHJlc291cmNlIiwibGltaXRzIjotMSwidW5pdHMiOiJjb3VudCIsImFjdGlvbiI6eyJyZWFkIjp0cnVlLCJyZWFkQWxsIjp0cnVlfX0seyJuYW1lIjoiY29udGFjdCIsImRlc2NyaXB0aW9uIjoiaGFzIGFjY2VzcyB0byB1c2VyIHJlc291cmNlIiwibGltaXRzIjotMSwidW5pdHMiOiJjb3VudCIsImFjdGlvbiI6eyJyZWFkIjp0cnVlLCJyZWFkQWxsIjp0cnVlfX0seyJuYW1lIjoiZW1haWxfdGVtcGxhdGUiLCJkZXNjcmlwdGlvbiI6ImhhcyBhY2Nlc3MgdG8gdXNlciByZXNvdXJjZSIsImxpbWl0cyI6LTEsInVuaXRzIjoiY291bnQiLCJhY3Rpb24iOnsicmVhZCI6dHJ1ZSwicmVhZEFsbCI6dHJ1ZX19XX19.2cn0uwjLVr3wP0PIiQKUHeWUUvcjdG_WZzr6Q6ff5Co")
+    @auth_data = Auth::TokenParser.parse("eyJhbGciOiJub25lIn0.eyJpc3MiOiJzZWxsIiwiZGF0YSI6eyJleHBpcnkiOjE2Mzg5NjU0MTEsInVzZXJJZCI6IjQ5NDUiLCJ0ZW5hbnRJZCI6IjIzMDgiLCJleHBpcmVzSW4iOjE2Mzg5NjU0MTEsInRva2VuVHlwZSI6ImJlYXJlciIsImFjY2Vzc1Rva2VuIjoiNzM0MmFkZTgtODU4Yi00YzcxLTk3YTgtOGQ0OWRhMWUzYWE0IiwidXNlcm5hbWUiOiJ0b255QHN0YXJrLmNvbSIsInBlcm1pc3Npb25zIjpbeyJpZCI6MTIsIm5hbWUiOiJ1c2VyIiwiZGVzY3JpcHRpb24iOiJoYXMgYWNjZXNzIHRvIHVzZXIiLCJsaW1pdHMiOi0xLCJ1bml0cyI6ImNvdW50IiwiYWN0aW9uIjp7InJlYWQiOnRydWUsIndyaXRlIjp0cnVlLCJ1cGRhdGUiOnRydWUsImRlbGV0ZSI6dHJ1ZSwiZW1haWwiOmZhbHNlLCJtZWV0aW5nIjpmYWxzZSwiY2FsbCI6ZmFsc2UsInNtcyI6ZmFsc2UsInRhc2siOmZhbHNlLCJub3RlIjpmYWxzZSwicmVhZEFsbCI6ZmFsc2UsInVwZGF0ZUFsbCI6dHJ1ZSwiZGVsZXRlQWxsIjpmYWxzZX19XX19.")
   end
 
   describe 'validations' do
 
     context 'with valid data' do
       it 'should be valid' do
-        expect(@auth_data.access_token).to eq('1c77c32f-5f5b-4342-91b2-961e38045498')
+        expect(@auth_data.access_token).to eq('7342ade8-858b-4c71-97a8-8d49da1e3aa4')
         expect(@auth_data.user_id).to eq(4945)
         expect(@auth_data.tenant_id).to eq(2308)
       end
@@ -23,12 +23,12 @@ RSpec.describe Auth::Data,type: :model do
             options = {
                 "data"=> {
                   "expiresIn"=> 3600,
-                  "accessToken"=> "1c77c32f-5f5b-4342-91b2-961e38045498",
+                  "accessToken"=> "7342ade8-858b-4c71-97a8-8d49da1e3aa4",
                   "expiry"=> 1638859073,
                   "tokenType"=> "Bearer",
-                  "userId"=> 4945,
+                  "userId"=> '4945',
                   "username"=> 'user1',
-                  "tenantId"=> 2308,
+                  "tenantId"=> '2308',
                   "permissions"=> [
                     {
                       "name"=> "lead",
@@ -55,12 +55,12 @@ RSpec.describe Auth::Data,type: :model do
             options = {
                 "data"=> {
                   "expiresIn"=> 3600,
-                  "accessToken"=> "1c77c32f-5f5b-4342-91b2-961e38045498",
+                  "accessToken"=> "7342ade8-858b-4c71-97a8-8d49da1e3aa4",
                   "expiry"=> 1638859073,
                   "tokenType"=> "Bearer",
-                  "userId"=> 4945,
+                  "userId"=> '4945',
                   "username"=> 'user1',
-                  "tenantId"=> 2308,
+                  "tenantId"=> '2308',
                   "permissions"=> [
                     {
                       "name"=> "lead",

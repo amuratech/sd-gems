@@ -2,6 +2,7 @@ require 'auth/token_parser'
 require 'auth/data'
 require 'exception_handler/sd_auth_exception'
 require 'iam/tenant_service.rb'
+require 'iam/validator.rb'
 require 'constants.rb'
 
 class SdAuthenticator

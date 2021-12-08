@@ -5,7 +5,7 @@ require_relative '../lib/iam/validator.rb'
 
 RSpec.describe SdAuthenticator do
   describe '#authenticate' do
-      let(:token){"eyJhbGciOiJub25lIn0.eyJpc3MiOiJzZWxsIiwiZGF0YSI6eyJleHBpcnkiOjE2Mzg5NTE0OTksInVzZXJJZCI6MSwidGVuYW50SWQiOjIsImV4cGlyZXNJbiI6MTYzODk1MTQ5OSwidG9rZW5UeXBlIjoiYmVhcmVyIiwiYWNjZXNzVG9rZW4iOiJjNTY3YWFhOC04N2RkLTQ3YmYtYTcyMS01MmZjZTJkODNjN2EiLCJ1c2VybmFtZSI6InRvbnlAc3RhcmsuY29tIiwicGVybWlzc2lvbnMiOlt7ImlkIjoxMiwibmFtZSI6InVzZXIiLCJkZXNjcmlwdGlvbiI6ImhhcyBhY2Nlc3MgdG8gdXNlciIsImxpbWl0cyI6LTEsInVuaXRzIjoiY291bnQiLCJhY3Rpb24iOnsicmVhZCI6dHJ1ZSwid3JpdGUiOnRydWUsInVwZGF0ZSI6dHJ1ZSwiZGVsZXRlIjp0cnVlLCJlbWFpbCI6ZmFsc2UsIm1lZXRpbmciOmZhbHNlLCJjYWxsIjpmYWxzZSwic21zIjpmYWxzZSwidGFzayI6ZmFsc2UsIm5vdGUiOmZhbHNlLCJyZWFkQWxsIjpmYWxzZSwidXBkYXRlQWxsIjp0cnVlLCJkZWxldGVBbGwiOmZhbHNlfX1dfX0."}
+      let(:token){"eyJhbGciOiJub25lIn0.eyJpc3MiOiJzZWxsIiwiZGF0YSI6eyJleHBpcnkiOjE2Mzg5NjU0MTEsInVzZXJJZCI6IjQ5NDUiLCJ0ZW5hbnRJZCI6IjIzMDgiLCJleHBpcmVzSW4iOjE2Mzg5NjU0MTEsInRva2VuVHlwZSI6ImJlYXJlciIsImFjY2Vzc1Rva2VuIjoiNzM0MmFkZTgtODU4Yi00YzcxLTk3YTgtOGQ0OWRhMWUzYWE0IiwidXNlcm5hbWUiOiJ0b255QHN0YXJrLmNvbSIsInBlcm1pc3Npb25zIjpbeyJpZCI6MTIsIm5hbWUiOiJ1c2VyIiwiZGVzY3JpcHRpb24iOiJoYXMgYWNjZXNzIHRvIHVzZXIiLCJsaW1pdHMiOi0xLCJ1bml0cyI6ImNvdW50IiwiYWN0aW9uIjp7InJlYWQiOnRydWUsIndyaXRlIjp0cnVlLCJ1cGRhdGUiOnRydWUsImRlbGV0ZSI6dHJ1ZSwiZW1haWwiOmZhbHNlLCJtZWV0aW5nIjpmYWxzZSwiY2FsbCI6ZmFsc2UsInNtcyI6ZmFsc2UsInRhc2siOmZhbHNlLCJub3RlIjpmYWxzZSwicmVhZEFsbCI6ZmFsc2UsInVwZGF0ZUFsbCI6dHJ1ZSwiZGVsZXRlQWxsIjpmYWxzZX19XX19."}
 
       context 'with no tenant or user classes are defined' do
           it 'should raise invalid token error' do
@@ -33,8 +33,8 @@ RSpec.describe SdAuthenticator do
           end
           it 'should return Auth Data' do
             auth_data = SdAuthenticator.authenticate "Authorization #{token}"
-            expect(auth_data.user_id).to eq(1)
-            expect(auth_data.access_token).to eq('c567aaa8-87dd-47bf-a721-52fce2d83c7a')
+            expect(auth_data.user_id).to eq(4945)
+            expect(auth_data.access_token).to eq('7342ade8-858b-4c71-97a8-8d49da1e3aa4')
             expect(auth_data.permissions.first.id).to eq(12)
             expect(auth_data.as_json['permissions'].first['action']).to match(
               {

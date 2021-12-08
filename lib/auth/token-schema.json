@@ -23,13 +23,13 @@
             "type": "string"
           },
           "userId": {
-            "type": "number"
+            "type": "string"
           },
           "username": {
             "type": "string"
           },
           "tenantId": {
-            "type": "number"
+            "type": "string"
           },
           "permissions": {
             "type": "array",
