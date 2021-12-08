@@ -39,7 +39,7 @@ RSpec.describe Iam::Validator do
       end
 
       it 'should throw Authentication error' do
-        expect{ Iam::Validator.validate(1, 'some-token') }.to raise_error(ExceptionHandler::SdAuthException, UNAUTHORISED)
+        expect{ Iam::Validator.validate(1, 'some-token') }.to raise_error(AuthExceptionHandler::SdAuthException, UNAUTHORISED)
       end
 
       it 'should not raise any error if validation not for_tenant_user' do
@@ -57,7 +57,7 @@ RSpec.describe Iam::Validator do
            }).to_return(status: 401)
       end
       it 'should throw Authentication error' do
-        expect{ Iam::Validator.validate(1, 'incorrect-token') }.to raise_error(ExceptionHandler::SdAuthException, UNAUTHORISED)
+        expect{ Iam::Validator.validate(1, 'incorrect-token') }.to raise_error(AuthExceptionHandler::SdAuthException, UNAUTHORISED)
       end
     end
 
@@ -70,7 +70,7 @@ RSpec.describe Iam::Validator do
            }).to_return(status: 404)
       end
       it 'should throw InvalidDataError error' do
-        expect{ Iam::Validator.validate(1, 'correct-token') }.to raise_error(ExceptionHandler::SdAuthException, INVALID_USER_DATA)
+        expect{ Iam::Validator.validate(1, 'correct-token') }.to raise_error(AuthExceptionHandler::SdAuthException, INVALID_USER_DATA)
       end
     end
 
@@ -83,7 +83,7 @@ RSpec.describe Iam::Validator do
            }).to_return(status: 500)
       end
       it 'should throw InternalServerError error' do
-        expect{ Iam::Validator.validate(1, 'correct-token') }.to raise_error(ExceptionHandler::SdAuthException, INTERNAL_SERVER_ERROR)
+        expect{ Iam::Validator.validate(1, 'correct-token') }.to raise_error(AuthExceptionHandler::SdAuthException, INTERNAL_SERVER_ERROR)
       end
     end
   end

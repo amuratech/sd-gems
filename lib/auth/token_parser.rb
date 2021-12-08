@@ -6,12 +6,12 @@ module Auth
     def self.parse(token)
       begin
         decoded_token = JWT.decode(token, nil, false)[0]
-        raise ExceptionHandler::SdAuthException unless decoded_token && decoded_token['data']
+        raise AuthExceptionHandler::SdAuthException unless decoded_token && decoded_token['data']
 
         Auth::Data.new(decoded_token) 
       rescue JWT::DecodeError => e
         puts "Error while parsing JWT token : #{e.message}"
-        raise ExceptionHandler::SdAuthException
+        raise AuthExceptionHandler::SdAuthException
       end
     end
   end

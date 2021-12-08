@@ -45,7 +45,7 @@ RSpec.describe Auth::Data,type: :model do
                 }
               }
             %w{expiresIn accessToken expiry tokenType userId tenantId permissions}.each do |attr|
-                expect{ Auth::Data.new({ 'data'=> options['data'].except(attr)})}.to raise_error(ExceptionHandler::SdAuthException, INVALID_TOKEN)
+                expect{ Auth::Data.new({ 'data'=> options['data'].except(attr)})}.to raise_error(AuthExceptionHandler::SdAuthException, INVALID_TOKEN)
             end
         end
     end
@@ -76,7 +76,7 @@ RSpec.describe Auth::Data,type: :model do
                 }
               }
             options['data']['permissions'].first['action']['unkonwn'] = true
-            expect{ Auth::Data.new(options)}.to raise_error(ExceptionHandler::SdAuthException, INVALID_TOKEN)
+            expect{ Auth::Data.new(options)}.to raise_error(AuthExceptionHandler::SdAuthException, INVALID_TOKEN)
         end
     end
   end

@@ -38,7 +38,7 @@ RSpec.describe Iam::TenantService do
            }).to_return(status: 200, body: "", headers: {})
       end
       it 'should throw invalid_tenant_details error' do
-        expect{ Iam::TenantService.fetch_details('incorrect-token') }.to raise_error(ExceptionHandler::SdAuthException, INVALID_DATA)
+        expect{ Iam::TenantService.fetch_details('incorrect-token') }.to raise_error(AuthExceptionHandler::SdAuthException, INVALID_DATA)
       end
     end
 
@@ -51,7 +51,7 @@ RSpec.describe Iam::TenantService do
            }).to_return(status: 401)
       end
       it 'should throw Authentication error' do
-        expect{ Iam::TenantService.fetch_details('incorrect-token') }.to raise_error(ExceptionHandler::SdAuthException, UNAUTHORISED)
+        expect{ Iam::TenantService.fetch_details('incorrect-token') }.to raise_error(AuthExceptionHandler::SdAuthException, UNAUTHORISED)
       end
     end
 
@@ -64,7 +64,7 @@ RSpec.describe Iam::TenantService do
            }).to_return(status: 500)
       end
       it 'should throw InternalServerError error' do
-        expect{ Iam::TenantService.fetch_details('correct-token') }.to raise_error(ExceptionHandler::SdAuthException, INTERNAL_SERVER_ERROR)
+        expect{ Iam::TenantService.fetch_details('correct-token') }.to raise_error(AuthExceptionHandler::SdAuthException, INTERNAL_SERVER_ERROR)
       end
     end
   end
