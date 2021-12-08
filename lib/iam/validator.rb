@@ -1,5 +1,5 @@
 require 'rest-client'
-module User
+module Iam
   class Validator
 
     def self.validate(user_id, token, for_tenant_user = true)

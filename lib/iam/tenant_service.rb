@@ -1,6 +1,6 @@
 require 'rest-client'
 
-module User
+module Iam
   class TenantService
       def self.fetch_details token
           return nil unless token

@@ -1,7 +1,7 @@
 require_relative '../spec_helper.rb'
-require_relative '../../lib/user/validator.rb'
+require_relative '../../lib/iam/validator.rb'
 
-RSpec.describe User::Validator do
+RSpec.describe Iam::Validator do
   describe '#validate' do
 
     context 'With valid fetch user request' do
@@ -15,15 +15,15 @@ RSpec.describe User::Validator do
       end
 
       it 'should return nil if no user passed' do
-        expect(User::Validator.validate(nil, nil)).to equal(nil)
+        expect(Iam::Validator.validate(nil, nil)).to equal(nil)
       end
 
       it 'should return nil if no token passed' do
-        expect(User::Validator.validate(1, nil)).to equal(nil)
+        expect(Iam::Validator.validate(1, nil)).to equal(nil)
       end
 
       it 'should return user with name if user id and token present' do
-        user = User::Validator.validate(1, 'some-token')
+        user = Iam::Validator.validate(1, 'some-token')
         expect(user[:name]).to match('Jane Doe')
       end
     end
@@ -39,11 +39,11 @@ RSpec.describe User::Validator do
       end
 
       it 'should throw Authentication error' do
-        expect{ User::Validator.validate(1, 'some-token') }.to raise_error(ExceptionHandler::SdAuthException, UNAUTHORISED)
+        expect{ Iam::Validator.validate(1, 'some-token') }.to raise_error(ExceptionHandler::SdAuthException, UNAUTHORISED)
       end
 
       it 'should not raise any error if validation not for_tenant_user' do
-        user = User::Validator.validate(1, 'some-token', false)
+        user = Iam::Validator.validate(1, 'some-token', false)
         expect(user[:name]).to match('Jane Doe')
       end
     end
@@ -57,7 +57,7 @@ RSpec.describe User::Validator do
            }).to_return(status: 401)
       end
       it 'should throw Authentication error' do
-        expect{ User::Validator.validate(1, 'incorrect-token') }.to raise_error(ExceptionHandler::SdAuthException, UNAUTHORISED)
+        expect{ Iam::Validator.validate(1, 'incorrect-token') }.to raise_error(ExceptionHandler::SdAuthException, UNAUTHORISED)
       end
     end
 
@@ -70,7 +70,7 @@ RSpec.describe User::Validator do
            }).to_return(status: 404)
       end
       it 'should throw InvalidDataError error' do
-        expect{ User::Validator.validate(1, 'correct-token') }.to raise_error(ExceptionHandler::SdAuthException, INVALID_USER_DATA)
+        expect{ Iam::Validator.validate(1, 'correct-token') }.to raise_error(ExceptionHandler::SdAuthException, INVALID_USER_DATA)
       end
     end
 
@@ -83,7 +83,7 @@ RSpec.describe User::Validator do
            }).to_return(status: 500)
       end
       it 'should throw InternalServerError error' do
-        expect{ User::Validator.validate(1, 'correct-token') }.to raise_error(ExceptionHandler::SdAuthException, INTERNAL_SERVER_ERROR)
+        expect{ Iam::Validator.validate(1, 'correct-token') }.to raise_error(ExceptionHandler::SdAuthException, INTERNAL_SERVER_ERROR)
       end
     end
   end
