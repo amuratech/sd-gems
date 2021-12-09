@@ -6,19 +6,26 @@ require 'iam/validator.rb'
 require 'constants.rb'
 
 class SdAuthenticator
-  def self.authenticate authorization_header, for_tenant_user = true
-    raise(AuthExceptionHandler::SdAuthException, INVALID_TOKEN) unless Object.const_defined?('Tenant') && Object.const_defined?('User')
-    token = http_auth_header(authorization_header)
+
+  # options: authorization_header: string, for_tenant_user: boolean
+  def self.authenticate options
+    raise(AuthExceptionHandler::SdAuthException, INVALID_TOKEN) unless options[:authorization_header] && Object.const_defined?('User')
+    token = http_auth_header(options[:authorization_header])
     auth_data = Auth::TokenParser.parse(token)
     
     # Tenant.update_record will find or initialize and update according to details
-    Tenant.update_record(Iam::TenantService.fetch_details(token))
-    user_data = Iam::Validator.validate(auth_data.user_id, token, for_tenant_user)
-    user_data[:tenant_id] = auth_data.tenant_id
-    # User.update_record will find or initialize and update according to details
-    user = User.update_record(user_data)
-    raise(AuthExceptionHandler::SdAuthException, INVALID_TOKEN) unless user
-  
+    if(Object.const_defined?('Tenant'))
+      tenant = Tenant.get_by_id(auth_data.tenant_id)
+      Tenant.update_record(Iam::TenantService.fetch_details(token)) unless tenant
+    end
+    user = User.get_by_id(auth_data.user_id)
+    unless user
+      user_data = Iam::Validator.validate(auth_data.user_id, token, options[:for_tenant_user])
+      user_data[:tenant_id] = auth_data.tenant_id
+      # User.update_record will find or initialize and update according to details
+      user = User.update_record(user_data)
+      raise(AuthExceptionHandler::SdAuthException, INVALID_TOKEN) unless user
+    end
     thread = Thread.current
     thread[:user] = user
     thread[:token] = token
