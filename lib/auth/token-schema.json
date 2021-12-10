@@ -14,7 +14,7 @@
             "type": "number"
           },
           "expiry": {
-            "type": "number"
+            "type": ["string", "number"]
           },
           "tokenType": {
             "type": "string"
@@ -26,7 +26,7 @@
             "type": "string"
           },
           "username": {
-            "type": "string"
+            "type": ["string", "null"]
           },
           "tenantId": {
             "type": "string"
