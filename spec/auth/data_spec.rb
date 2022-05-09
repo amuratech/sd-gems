@@ -32,13 +32,14 @@ RSpec.describe Auth::Data,type: :model do
                   "permissions"=> [
                     {
                       "name"=> "lead",
-                      "description"=> "has access to lead resource",
+                      "description"=> nil,
                       "limits"=> -1,
                       "units"=> "count",
                       "action"=> {
                         "read"=> true,
                         "readAll"=> true,
-                        "call"=> true
+                        "call"=> true,
+                        "quote" => true
                       }
                     }
                   ]
@@ -70,13 +71,14 @@ RSpec.describe Auth::Data,type: :model do
                       "action"=> {
                         "read"=> true,
                         "readAll"=> true,
+                        "quote" => false
                       }
                     }
                   ]
                 }
               }
             options['data']['permissions'].first['action']['unkonwn'] = true
-            expect{ Auth::Data.new(options)}.to raise_error(AuthExceptionHandler::SdAuthException, INVALID_TOKEN)
+            expect{ Auth::Data.new(options)}.not_to raise_error(AuthExceptionHandler::SdAuthException, INVALID_TOKEN)
         end
     end
   end
