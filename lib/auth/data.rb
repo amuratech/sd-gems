@@ -1,7 +1,7 @@
 require "json-schema"
 
 module Auth
-  class Data  
+  class Data
     attr_accessor(
       :expires_in,
       :access_token,
@@ -10,11 +10,12 @@ module Auth
       :user_id,
       :username,
       :tenant_id,
-      :permissions
+      :permissions,
+      :meta
     )
 
     def initialize options = {}
-      begin 
+      begin
        JSON::Validator.validate!(File.read(File.join(File.dirname(__FILE__), 'token-schema.json')), options)
       rescue JSON::Schema::ValidationError => e
         raise(AuthExceptionHandler::SdAuthException, INVALID_TOKEN)
@@ -22,7 +23,7 @@ module Auth
       end
       options = options['data']
       UnderscorizeKeys.do(options)
-      [:expires_in, :access_token, :expiry, :token_type, :user_id, :username, :tenant_id].each{|attr| send("#{attr}=", options[attr.to_s])}
+      [:expires_in, :access_token, :expiry, :token_type, :user_id, :username, :tenant_id, :meta].each{|attr| send("#{attr}=", options[attr.to_s])}
       @permissions = JSON.parse(options['permissions'].to_json, object_class: OpenStruct)
     end
 

@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = %q{sd_auth}
-  s.version = "1.0.5"
+  s.version = "1.0.6"
   s.date = %q{2021-11-24}
   s.summary = %q{sd_auth provides authentication for ruby services}
   s.files = Dir["lib/**/*"]
